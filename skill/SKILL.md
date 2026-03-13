@@ -423,15 +423,23 @@ After writing any verse, run this check BEFORE outputting:
 
 ### 2. Syllable count (MANDATORY — always do this)
 
-Count every syllable in every bar. Bars within the same 4-bar group must be within **2 syllables of each other**. A group where bars range from 11 to 18 syllables is broken — the listener will feel it even if they can't name it.
 
-**Target syllable counts by BPM:**
+Count every syllable in every bar. **All bars must have an EVEN syllable count — no exceptions.**
 
-| BPM / Style | Syllables per bar | Delivery |
-|-------------|------------------|---------|
-| 90–110 BPM (boom bap, hip-hop) | 8–12 | Standard |
-| 130–140 BPM (trap, grime) | 12–14 | Double-time |
-| 148+ BPM (DnB, UK MC) | 13–15 | Half-time over fast drums |
+**Why:** A rap bar lives in 4/4 time. Each beat has 2 subdivisions (8th notes). That means the grid only closes cleanly at multiples of 2: 8, 10, 12, 14, 16. An odd number (13, 15, 17) means the last syllable is always rhythmically orphaned — one subdivision is unaccounted for every single bar. This is why verses feel "lumpy" even when the rhymes are correct.
+
+**Valid syllable counts:** `8, 10, 12, 14, 16`
+**Invalid:** `9, 11, 13, 15, 17` — always fix these before delivering.
+
+**Target by BPM:**
+
+| BPM / Style | Target syllables | Notes |
+|-------------|-----------------|-------|
+| 90–110 BPM (boom bap, hip-hop) | 8 or 10 | Standard delivery |
+| 130–140 BPM (trap, grime) | 12 or 14 | Double-time |
+| 148+ BPM (DnB, UK MC) | 14 or 16 | Half-time over fast drums |
+
+All bars within the same verse should use the **same target** (e.g. all 14 syllables) or alternate cleanly between two adjacent even numbers (e.g. 12 and 14). Never mix 10 and 16 in the same verse — the rhythm will feel inconsistent.
 
 **How to count:** Say the bar out loud, tap each syllable. Multi-syllable words add up fast:
 
@@ -446,9 +454,9 @@ Count every syllable in every bar. Bars within the same 4-bar group must be with
 | `nevertheless` | 4 |
 | `simultaneously` | 6 |
 
-**Per-group variance rule:** After counting, check that every group of 4 bars (1-4, 5-8, 9-12, 13-16) has bars within 2 syllables of each other. If the spread is wider than 2 — trim the long bars or expand the short ones.
+**Per-group variance rule:** Every group of 4 bars (1-4, 5-8, 9-12, 13-16) must have bars within **2 syllables of each other** (e.g. all 14, or a mix of 12 and 14). A group with bars at 10, 10, 14, 16 is broken — normalise it to all 12 or all 14.
 
-**What uneven syllable counts sound like:** The verse feels "lumpy" — some bars rush, some drag, the rhythm feels broken even if the rhymes land. This is the most common reason a verse sounds wrong in Suno or in performance.
+**What odd/uneven syllable counts sound like:** The verse feels "lumpy" — some bars rush, some drag. The rhythm breaks even when rhymes land. This is the single most common reason a verse sounds wrong in Suno or in performance.
 
 ### 3. Chain audit
 - Map the end-rhyme sound for every bar. Do bars 1-4 share a sound? 5-8? 9-12? 13-16?
