@@ -310,6 +310,146 @@ Adjust freely for the genre. Drill might skip the bridge. Boom bap might go
 
 ---
 
+## Eminem Multi-Rhyme Architecture (Advanced Flow Standard)
+
+This is the craft standard to aim for on every verse. Default to this level unless the user requests simpler flow.
+
+### How it works
+
+Eminem flow stacks rhymes in THREE ways simultaneously:
+
+**1. End-rhyme cascade** — the same vowel sound ends 3-4+ consecutive bars:
+```
+"You walked in owned — cold tone — whole zone folded and I felt it"   ← -et
+"Every bitch in the building recalibrated — I just sat there and let it"  ← -et
+"Happen — clocked you over ice — nice — twice — deadass set it"         ← -et
+"On fire in my head — fuck, bad idea in a dress — yeah I said it"       ← -et
+```
+Four bars. Same sound all the way through. The listener feels the chain without noticing it consciously.
+
+**2. Within-line triple** — three or more rhyming sounds INSIDE a single bar:
+```
+"Two shots deep — thoughts cheap — deadass feet won't keep to any plan"
+              ↑          ↑                   ↑        ↑
+           deep        cheap               feet     keep    ← FOUR before the comma
+```
+
+**3. Polysyllabic rhyme** — multi-syllable words that rhyme on 2+ syllables:
+```
+"I went in harder than a girl with any good sense would demonstrate"  ← -ate
+"You move like the exception to every fucking rule I built to create"  ← -ate
+"And rules are bullshit theories till your hand's on my— relocate"    ← -ate
+```
+`demonstrate / create / relocate` — all three rhyme on their last two syllables.
+
+### Rhyme chain notation
+
+When planning a verse, map the chains before writing:
+
+```
+Group 1 (bars 1-4):  [-et chain]   felt it / let it / set it / said it
+Group 2 (bars 5-8):  [-on chain]   collarbone / on / gone / gown
+Group 3 (bars 9-12): [-in chain]   in it / finished / fuck it / cut it
+Group 4 (bars 13-16):[-ing chain]  staying / vacationing + [pivot] regret this / exit
+```
+
+Each group of 4 bars = one chain. 16-bar verse = 4 chains. The final bar of each group is the punch — make it the hardest line in that 4-bar block.
+
+### Arc within the verse
+
+Structure each 16-bar verse in 4 emotional phases:
+
+| Bars | Phase | Function |
+|------|-------|---------|
+| 1–4 | **Setup** | Establish the scene, introduce the tension |
+| 5–8 | **Escalation** | Physical or emotional detail, the move |
+| 9–12 | **Internal** | The inner conflict, losing the argument with yourself |
+| 13–16 | **Commit** | Decision made — closes with the hardest line in the verse |
+
+**Bar 16 is the most important bar in the verse.** It's what the crowd repeats. Never end a verse on a soft line.
+
+### The Eminem word choice moves
+
+- **Unexpected multi-syllable word** mid-bar: `"vacationing"`, `"recalibrated"`, `"contraband"` — catches the ear
+- **The dash implied word**: `"till your hand's on my— relocate"` — implies explicit content without saying it. More powerful than saying it.
+- **Self-aware meta line**: `"Smart bitches make terrible choices — I just made mine in a gown"` — the MC commenting on herself
+- **Near-rhyme opener**: start a 4-bar chain on a slant rhyme, land it perfectly by bar 4
+- **Repeated word with shifted meaning**: `"Tomorrow's a problem for tomorrow's bitch / Tonight's bitch is occupied"` — anaphora + pivot
+
+---
+
+## Explicit Language & Slang Guide
+
+### How to use cuss words in rap (the right way)
+
+Cuss words are NOT decoration. They land as **punctuation, intensifiers, and emotional pivots** — not as filler. Each placement must be intentional:
+
+| Type | Example | Function |
+|------|---------|---------|
+| **Mid-bar pivot** | `"fuck, bad idea in a dress"` | Marks the moment of self-awareness |
+| **Intensifier** | `"every fucking rule I built"` | Amplifies the word after it |
+| **Implied with dash** | `"your hand's on my—"` | More powerful than saying it |
+| **Noun swap** | `"Smart bitches make terrible choices"` | Self-empowering, owns the identity |
+| **Closer punch** | `"can't fuckin' dismiss"` | Makes the end rhyme hit harder |
+| **Verb replace** | `"danger fucked me sideways"` | More visceral than "ruined me" |
+
+**Never:** bolt cuss words onto a clean bar as a patch. If removing it doesn't change the meaning or rhythm, it shouldn't be there.
+
+### East Coast female rap slang reference
+
+| Slang | Meaning | Example |
+|-------|---------|---------|
+| `deadass` | seriously / for real (NYC) | `"deadass had standards"` |
+| `no cap` | no lie | `"no cap, I knew better"` |
+| `drip` | style / swag | `"your drip hit different"` |
+| `hit different` | feel special or unusual | `"that kind hits different"` |
+| `on peak` / `at peak` | at maximum intensity | `"group chat on peak"` |
+| `whole [noun]` | intensifier (NYC) | `"whole crime scene"`, `"whole bitch"` |
+| `real quick` | fast / suddenly | `"deleted every bit — real quick"` |
+| `understood the assignment` | knew exactly what to do | `"she understood"` |
+| `good sick` | overwhelmed in a good way | `"that fuck-it-all-go-in sick"` |
+| `not my contest` | not my problem | `"not my fuckin' contest"` |
+
+**Rule:** slang lands at internal positions — never on the end-rhyme beat unless it IS the rhyme. `"deadass"` before the chain, not instead of it.
+
+---
+
+## Self-Review Protocol (Run Before Delivering)
+
+After writing any verse, run this check BEFORE outputting:
+
+### 1. Bar count
+- Count every line. Is it 8 or 16? If not — fix it before anything else.
+
+### 2. Chain audit
+- Map the end-rhyme sound for every bar. Do bars 1-4 share a sound? 5-8? 9-12? 13-16?
+- If any 4-bar group has no consistent end sound — it's prose, not rap. Rewrite.
+
+### 3. Within-line density
+- Does every bar have at least ONE internal rhyme or repeated sound cluster?
+- If a bar has zero internal rhyme, it's flat. Add a cluster.
+
+### 4. Bar 16 test
+- Read bar 16 out loud. Is it the most quotable line in the verse?
+- If it's a shrug or a filler line — rewrite just that bar until it's a punch.
+
+### 5. Narrative coherence check
+Flag these common problems:
+- **Ambiguous pronoun** — who is "she/he/they" at this point?
+- **Tense shift** — don't mix past and present without intent
+- **"I ran"** problem — directional verbs can imply the opposite of what's meant
+- **Setting jump** — did she teleport between bars? Justify the scene change
+- **Missing subject** — floating descriptors like `"Off like a fire alarm"` need a subject
+
+### 6. Slang authenticity check
+- Read every slang term. Does it feel natural in context, or bolted on?
+- Is the slang era-appropriate for the genre specified?
+- Could you remove it without losing the bar? If yes — it's decoration, not craft.
+
+---
+
+
+
 ## Style Behavior
 
 | Situation | Action |
