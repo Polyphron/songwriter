@@ -193,7 +193,6 @@ When this skill is active, I shift into **composer mode**:
 - **⚠️ HARD LIMIT: 5000 characters max** — Suno will reject anything over 5000 characters (including section labels, adlibs, and whitespace). Always count characters before delivering. If a song exceeds 5000 chars, offer a trimmed version or split into two paste blocks.
 - All section labels go inside **square brackets**: `[Intro]`, `[Verse 1]`, `[Hook]`, `[Chorus]`, `[Bridge]`, `[Beat Switch]`, `[Outro]`, `[Pre-Chorus]`, `[Adlib]`, `[Instrumental Break]`
 - **Never use parentheses** for section labels or production notes.
-- Style/production prompts (for Suno's music generation) go in brackets too: `[Trap beat, 140 BPM, dark 808s]`
 - Adlibs go inline in brackets: `[yeah]`, `[uh]`, `[grrt]`, `[woo]`, `[let's go]`
 - Output must be **clean and paste-ready** for Suno — no extra commentary inside the lyric block.
 - Do not explain the format unless explicitly asked.
@@ -201,15 +200,70 @@ When this skill is active, I shift into **composer mode**:
 ### Staying Under 5000 Characters
 
 - **Count early** — A typical 3-verse song with hooks runs 2500–4000 chars. Add instrumentals and adlibs and it climbs fast.
-- **Section labels count** — `[Instrumental Break — 16 bars, heavy drums, synth stabs]` is 55 chars. Keep labels concise: `[Instrumental Break]` (22 chars).
+- **Section labels count** — `[Instrumental Break — 16 bars, heavy drums]` = 47 chars. Keep labels concise: `[Instrumental Break]` = 22 chars.
 - **Trim strategies if over limit:**
-  1. Shorten instrumental break descriptions (just `[Instrumental Break]`)
+  1. Shorten instrumental break descriptions to just `[Instrumental Break]`
   2. Reduce adlib density — keep only the essential ones
-  3. Cut repeated hook to reference: `[Hook]` without re-writing lyrics
+  3. Cut repeated hooks to reference: `[Hook]` without re-writing lyrics
   4. Tighten verbose lines without losing meaning
-- **Split-paste for long tracks** — If the song genuinely needs 5000+ chars, split into Part 1 and Part 2 at a natural break (e.g., after the second hook). Use Suno's "Continue" feature to extend.
+- **Split-paste for long tracks** — If the song genuinely needs 5000+ chars, split at a natural break (after the second hook). Use Suno's "Continue" feature to extend.
+
+### Bar Count Discipline (CRITICAL)
+
+Suno operates on strict **8-bar musical units**. Verses must always be **8 or 16 bars — never 12**.
+
+| Count | Result |
+|-------|--------|
+| ✅ **8 bars** | Clean. Short verse or intro verse. |
+| ✅ **16 bars** | Clean. Two 8-bar halves. Suno's preferred full verse. |
+| ❌ **12 bars** | Broken. Suno treats the final 4 as a new section — causes vocal style glitches, key drift, and broken flow. |
+| ❌ **Any other count** | 6, 10, 14 — all fail for the same reason. |
+
+**Pre-hooks, outros, and adlib sections can be 4 bars.**
+**How to check:** Count every lyric line in a section. If it's not 8 or 16, add or cut lines until it lands on the grid. Do not approximate.
+
+### Style Instructions — When and Where
+
+**RARELY add a top-level style block inside the lyric body.**
+
+Suno has a dedicated "Style of Music" input field for the overall track style. Putting a style block at the top of the lyric body (`[East Coast rap, 140 BPM, female vocals]`) duplicates this, wastes character budget, and is only needed when there is no main prompt or you need a full override.
+
+**Default behaviour:** set the base style in Suno's main prompt field. The lyric body gets no style header.
+
+#### Per-Section Style Variations
+
+When specific sections need a different vocal delivery or production style from the rest of the track, **embed the style descriptor directly inside that section's label bracket**:
+
+```
+[Verse 1 - East Coast rap, 140 BPM, female rap vocals]
+...verse lyrics...
+
+[Hook]
+...hook lyrics...     ← inherits the main Suno prompt style (e.g. glossy, sung)
+
+[Bridge - half-sung, breathy, intimate]
+...bridge lyrics...
+```
+
+This applies the rap delivery to Verse 1 only. The Hook and other sections receive no override and stay true to the main Suno prompt.
+
+**Expandable across any combination of sections and styles:**
+```
+[Verse 1 - UK drill, male rap vocals, dark]
+[Verse 2 - East Coast rap, female vocals, faster]
+[Hook - glossy sung pop, anthemic]
+[Bridge - spoken word, no melody]
+[Beat Switch - phonk, distorted 808s]
+```
+
+**What to include in a section style tag (keep to 3–6 words):**
+- Vocal style: `female rap vocals`, `male sung`, `auto-tuned`, `spoken word`, `breathy`
+- Regional/genre accent: `East Coast`, `UK grime`, `Southern trap`, `drill`
+- Tempo modifier (only if changing section tempo): `double-time`, `half-time`
+- Mood/energy shift: `dark`, `intimate`, `aggressive`, `anthemic`
 
 ---
+
 
 ## Default Song Structure
 
