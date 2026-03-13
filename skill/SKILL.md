@@ -421,32 +421,62 @@ After writing any verse, run this check BEFORE outputting:
 ### 1. Bar count
 - Count every line. Is it 8 or 16? If not — fix it before anything else.
 
-### 2. Chain audit
+### 2. Syllable count (MANDATORY — always do this)
+
+Count every syllable in every bar. Bars within the same 4-bar group must be within **2 syllables of each other**. A group where bars range from 11 to 18 syllables is broken — the listener will feel it even if they can't name it.
+
+**Target syllable counts by BPM:**
+
+| BPM / Style | Syllables per bar | Delivery |
+|-------------|------------------|---------|
+| 90–110 BPM (boom bap, hip-hop) | 8–12 | Standard |
+| 130–140 BPM (trap, grime) | 12–14 | Double-time |
+| 148+ BPM (DnB, UK MC) | 13–15 | Half-time over fast drums |
+
+**How to count:** Say the bar out loud, tap each syllable. Multi-syllable words add up fast:
+
+| High-risk words | Syllables |
+|----------------|-----------|
+| `algorithm` | 4 |
+| `anti-immigration` | 7 |
+| `2014` / `twenty-fourteen` | 4 |
+| `Amelias` | 4 |
+| `congratulations` | 5 |
+| `recalibrated` | 5 |
+| `nevertheless` | 4 |
+| `simultaneously` | 6 |
+
+**Per-group variance rule:** After counting, check that every group of 4 bars (1-4, 5-8, 9-12, 13-16) has bars within 2 syllables of each other. If the spread is wider than 2 — trim the long bars or expand the short ones.
+
+**What uneven syllable counts sound like:** The verse feels "lumpy" — some bars rush, some drag, the rhythm feels broken even if the rhymes land. This is the most common reason a verse sounds wrong in Suno or in performance.
+
+### 3. Chain audit
 - Map the end-rhyme sound for every bar. Do bars 1-4 share a sound? 5-8? 9-12? 13-16?
 - If any 4-bar group has no consistent end sound — it's prose, not rap. Rewrite.
 
-### 3. Within-line density
+### 4. Within-line density
 - Does every bar have at least ONE internal rhyme or repeated sound cluster?
 - If a bar has zero internal rhyme, it's flat. Add a cluster.
 
-### 4. Bar 16 test
+### 5. Bar 16 test
 - Read bar 16 out loud. Is it the most quotable line in the verse?
 - If it's a shrug or a filler line — rewrite just that bar until it's a punch.
 
-### 5. Narrative coherence check
+### 6. Narrative coherence check
 Flag these common problems:
 - **Ambiguous pronoun** — who is "she/he/they" at this point?
 - **Tense shift** — don't mix past and present without intent
-- **"I ran"** problem — directional verbs can imply the opposite of what's meant
+- **"I ran" problem** — directional verbs can imply the opposite of what's meant
 - **Setting jump** — did she teleport between bars? Justify the scene change
 - **Missing subject** — floating descriptors like `"Off like a fire alarm"` need a subject
 
-### 6. Slang authenticity check
+### 7. Slang authenticity check
 - Read every slang term. Does it feel natural in context, or bolted on?
 - Is the slang era-appropriate for the genre specified?
 - Could you remove it without losing the bar? If yes — it's decoration, not craft.
 
 ---
+
 
 
 
