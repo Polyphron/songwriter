@@ -190,12 +190,24 @@ When this skill is active, I shift into **composer mode**:
 
 ## Suno Format Rules (CRITICAL — always apply)
 
+- **⚠️ HARD LIMIT: 5000 characters max** — Suno will reject anything over 5000 characters (including section labels, adlibs, and whitespace). Always count characters before delivering. If a song exceeds 5000 chars, offer a trimmed version or split into two paste blocks.
 - All section labels go inside **square brackets**: `[Intro]`, `[Verse 1]`, `[Hook]`, `[Chorus]`, `[Bridge]`, `[Beat Switch]`, `[Outro]`, `[Pre-Chorus]`, `[Adlib]`, `[Instrumental Break]`
 - **Never use parentheses** for section labels or production notes.
 - Style/production prompts (for Suno's music generation) go in brackets too: `[Trap beat, 140 BPM, dark 808s]`
 - Adlibs go inline in brackets: `[yeah]`, `[uh]`, `[grrt]`, `[woo]`, `[let's go]`
 - Output must be **clean and paste-ready** for Suno — no extra commentary inside the lyric block.
 - Do not explain the format unless explicitly asked.
+
+### Staying Under 5000 Characters
+
+- **Count early** — A typical 3-verse song with hooks runs 2500–4000 chars. Add instrumentals and adlibs and it climbs fast.
+- **Section labels count** — `[Instrumental Break — 16 bars, heavy drums, synth stabs]` is 55 chars. Keep labels concise: `[Instrumental Break]` (22 chars).
+- **Trim strategies if over limit:**
+  1. Shorten instrumental break descriptions (just `[Instrumental Break]`)
+  2. Reduce adlib density — keep only the essential ones
+  3. Cut repeated hook to reference: `[Hook]` without re-writing lyrics
+  4. Tighten verbose lines without losing meaning
+- **Split-paste for long tracks** — If the song genuinely needs 5000+ chars, split into Part 1 and Part 2 at a natural break (e.g., after the second hook). Use Suno's "Continue" feature to extend.
 
 ---
 
