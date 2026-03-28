@@ -377,6 +377,26 @@ Adjust freely for the genre. Drill might skip the bridge. Boom bap might go
 
 ## Writing Rules
 
+### The Craft-Content Principle (CRITICAL)
+
+Authentic content and musical craft are **two separate axes**. A song can be real AND have terrible rhythm. A song can have perfect flow AND say nothing. **Both axes must be high simultaneously.**
+
+```
+                    HIGH CRAFT
+                        │
+          GENERIC BUT   │   THE GOAL
+          WELL-BUILT    │   Real + sticky + punchy
+                        │
+  LOW CONTENT ──────────┼────────── HIGH CONTENT
+                        │
+          BROKEN ON     │   AUTHENTIC BUT
+          EVERY AXIS    │   FORGETTABLE (prose over a beat)
+                        │
+                    LOW CRAFT
+```
+
+**Anti-sterilization fixes content. These writing rules fix craft. Both run simultaneously.**
+
 ### Lyrics
 - Always write **fully original** content — never copy, paraphrase, or imitate specific copyrighted songs.
 - Capture mood, energy, and genre — **not** existing lyrics.
@@ -390,6 +410,79 @@ Adjust freely for the genre. Drill might skip the bridge. Boom bap might go
 - Internal rhyme, multisyllabic rhyme, and rhythmic variation are signatures of quality.
 - Think about breath points, double-time drops, triplet switches — write with performance in mind.
 - Every line should be speakable out loud. If it doesn't flow when spoken, rewrite it.
+
+### Chorus ≠ Verse (NEVER blend them)
+
+**This is the #1 structural failure mode.** A chorus that reads like another verse is not a chorus — it's extra bars nobody will remember.
+
+**The rules:**
+
+| Property | Verse | Chorus |
+|----------|-------|--------|
+| **Line length** | 12-16 syllables | **6-10 syllables** — shorter, punchier |
+| **Density** | Narrative, detail-heavy | **Stripped, essential** — one idea per line |
+| **Repetition** | Minimal — each bar says something new | **High** — at least one phrase repeats, ideally the opener |
+| **Rhyme** | Chain rhyme across 4-bar groups | **Couplet rhyme** — AA BB or AABB, lands immediately |
+| **Function** | Tell the story, build the world | **Be the thing people shout back** |
+| **Singability** | Spoken/rapped delivery | **Melodic or chant-able** — even in rap, the hook lifts |
+
+**❌ Chorus that reads like a verse (FAIL):**
+```
+"And everything's fucking perfect for the first time in weeks"     ← 16 syllables, narrative
+"Strangers feel like family and the bass speaks in tongues"        ← 14 syllables, narrative
+"Jaw's going sideways but I'm smiling with my whole chest"        ← 14 syllables, narrative
+```
+
+**✅ Chorus that works as a hook (PASS):**
+```
+"Lights out, legs gone"               ← 4 syllables — punchy
+"Bass so deep it breaks the bone"     ← 8 syllables — melodic
+"We don't stop till the sun comes on" ← 9 syllables — shout-back
+"Roll me up and send me home"         ← 8 syllables — sticky, repeatable
+```
+
+**Test:** Can a drunk person in a club shout this chorus back after hearing it once? If no — rewrite.
+
+### Punchline Discipline
+
+**Every 4-bar group has a CLOSER (bar 4 or bar 8). This bar must be the hardest-hitting line in its group.** Not an observation. Not a continuation. A PUNCH.
+
+**What makes a bar a punch:**
+- It reframes everything that came before it
+- It contains a twist, a flip, a surprise, or a quotable phrase
+- It has **more internal rhyme** than the setup bars
+- You could put it on a t-shirt or a tweet and it would still hit
+- It's the bar people would text to a friend
+
+**❌ Flat closer (FAIL):**
+```
+"Straight to the bar — vodka Red Bull, and we begin"
+```
+This is a stage direction. Nothing hits. Nothing surprises. Forgettable.
+
+**✅ Punched closer (PASS):**
+```
+"Straight to the bar — one drink in and I'm already someone else"
+```
+Twist at the end. Reframes the scene. Slightly dark. Sticky.
+
+**More examples of hard closers:**
+```
+"Same girl, same line, same lie — I just believed it less this time"
+"Told myself I'd leave by two — it's five and I'm still not proved right"
+"Last time I said never again, I meant it — that was a fucking lie too"
+"She smiled like she knew what was coming — I smiled like I didn't"
+```
+
+**Minimum:** 2 punchlines per verse (bar 4 + bar 8). At least 1 per chorus.
+
+### Quotable Density
+
+A song needs **minimum 3 bars that survive outside the song** — lines someone would quote, caption, or remember the next day.
+
+After writing, highlight your top 3 most quotable bars. If you struggle to find 3:
+- The song lacks punch — go back and upgrade the closers
+- Too much narrative, not enough BARS
 
 ### Tone & Language
 - Use explicit, vivid language when it fits the vibe — rawness is valid.
