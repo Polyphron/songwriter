@@ -27,6 +27,8 @@ not template execution. Every song should feel like a real track.
 | Tool | Location | Purpose |
 |------|----------|---------|
 | **Audio Analyzer** | `C:\1_2\songwriter\scripts\audio_analyzer.py` | BPM, key, energy, sections, mood, spectrum analysis from audio |
+| **Stem Extractor** | `C:\1_2\songwriter\scripts\stem_extractor.py` | Separate audio into vocals, drums, bass, other (+ guitar/piano) |
+| **MIDI Extractor** | `C:\1_2\songwriter\scripts\midi_extractor.py` | Convert audio/stems to MIDI for DAW import and re-keying |
 | **Veo3 Prompter** | `C:\1_2\songwriter\scripts\veo3_prompter.py` | Song-to-video storyboard with scene-by-scene Veo3 prompts |
 | **Start Frame Gen** | `generate_image` tool (built-in) | AI-generated start frames for Veo3 scenes |
 
@@ -61,6 +63,88 @@ python "C:\1_2\songwriter\scripts\audio_analyzer.py" "demo.flac" --output text
 
 **When to use:** Before writing lyrics to a beat, when the user provides an audio
 file, or when reverse-engineering a reference track's vibe.
+
+### Stem Extractor
+
+Separates any audio file into individual stems using Meta's Demucs AI.
+Supports 4 models with different quality/speed tradeoffs.
+
+```powershell
+# Default 4-stem separation (vocals, drums, bass, other)
+python "C:\1_2\songwriter\scripts\stem_extractor.py" "track.mp3"
+
+# Fine-tuned model for better quality
+python "C:\1_2\songwriter\scripts\stem_extractor.py" "track.mp3" --model htdemucs_ft
+
+# 6-stem mode (adds guitar + piano)
+python "C:\1_2\songwriter\scripts\stem_extractor.py" "track.mp3" --model htdemucs_6s
+
+# Vocals only (fastest)
+python "C:\1_2\songwriter\scripts\stem_extractor.py" "track.mp3" --vocals-only
+
+# Highest quality (5 random shifts)
+python "C:\1_2\songwriter\scripts\stem_extractor.py" "track.mp3" --model htdemucs_ft --shifts 5
+
+# Output as MP3 or FLAC
+python "C:\1_2\songwriter\scripts\stem_extractor.py" "track.mp3" --format mp3
+python "C:\1_2\songwriter\scripts\stem_extractor.py" "track.mp3" --format flac
+```
+
+**Requirements:** `pip install demucs torch torchaudio`
+
+**Models:**
+
+| Model | Stems | Speed | Quality |
+|-------|-------|-------|---------|
+| `htdemucs` | vocals, drums, bass, other | Fast | Good |
+| `htdemucs_ft` | vocals, drums, bass, other | Slower | Better |
+| `htdemucs_6s` | vocals, drums, bass, guitar, piano, other | Slower | Best for complex tracks |
+| `mdx_extra` | vocals, drums, bass, other | Medium | Alternative quality profile |
+
+**When to use:** When creating a remix reference track, isolating vocals for
+MIDI extraction, isolating drums for tempo analysis, or separating instruments
+for re-arrangement in a DAW.
+
+### MIDI Extractor
+
+Converts audio to MIDI using Spotify's basic-pitch neural network. Ideal for
+extracting melodies from vocal stems, which can then be re-keyed and
+tempo-shifted in a DAW.
+
+```powershell
+# Basic extraction
+python "C:\1_2\songwriter\scripts\midi_extractor.py" "vocals.wav"
+
+# With note range filter (useful for vocals)
+python "C:\1_2\songwriter\scripts\midi_extractor.py" "vocals.wav" --min-note C3 --max-note C6
+
+# Lower thresholds = more notes detected (noisier but catches more)
+python "C:\1_2\songwriter\scripts\midi_extractor.py" "vocals.wav" --onset-threshold 0.3 --frame-threshold 0.2
+
+# Save CSV + piano roll plot
+python "C:\1_2\songwriter\scripts\midi_extractor.py" "vocals.wav" --save-csv --save-plot
+
+# Include pitch bends (for expressive vocal content)
+python "C:\1_2\songwriter\scripts\midi_extractor.py" "vocals.wav" --pitch-bends
+```
+
+**Requirements:** `pip install basic-pitch`
+
+**Output includes:**
+- MIDI file (.mid) — importable into any DAW
+- Note count, range, and top notes analysis
+- Optional CSV with all note events (start, end, pitch, velocity)
+- Optional piano roll visualization (.png)
+
+**Typical pipeline with stem extractor:**
+```
+1. Extract stems:  python stem_extractor.py "track.mp3"
+2. Extract MIDI:   python midi_extractor.py "./stems/htdemucs/track/vocals.wav"
+3. Import .mid into DAW → re-key → re-tempo → bounce reference track
+```
+
+**When to use:** After stem extraction, when building a custom reference track
+for Suno's Remix feature, or when analyzing melodic content for songwriting.
 
 ### Veo3 Prompt Generator
 
@@ -102,15 +186,19 @@ when they need Veo3 prompts for any video project.
 When building a complete track + video, follow this order:
 
 ```
-1. ANALYZE     →  Audio analyzer on reference track/beat
-2. WRITE       →  Lyrics using analysis data (BPM, key, mood, sections)
-3. SUNO        →  Style prompt + lyric sheet (paste-ready)
-4. STORYBOARD  →  Veo3 prompter on finished lyrics (script or manual)
-5. START FRAMES → generate_image for key scenes (Veo3 anchors)
-6. POLISH      →  Revise lyrics + video prompts + frames together
+1. ANALYZE      →  Audio analyzer on reference track/beat
+2. EXTRACT      →  Stem extractor to isolate vocals/drums/bass
+3. MIDI         →  MIDI extractor on vocal stem for melody
+4. REFERENCE    →  Build custom reference track in DAW (re-key, re-tempo)
+5. WRITE        →  Lyrics using analysis data (BPM, key, mood, sections)
+6. SUNO         →  Style prompt + lyric sheet + reference track (Remix mode)
+7. STORYBOARD   →  Veo3 prompter on finished lyrics (script or manual)
+8. START FRAMES →  generate_image for key scenes (Veo3 anchors)
+9. POLISH       →  Revise lyrics + video prompts + frames together
 ```
 
-I can run this pipeline end-to-end or enter at any step.
+Steps 2-4 are optional but recommended for remixes. I can run this
+pipeline end-to-end or enter at any step.
 
 ---
 
@@ -378,6 +466,58 @@ Structure each 16-bar verse in 4 emotional phases:
 
 ---
 
+## Anti-Sterilization Protocol (CRITICAL — Read Before Every Song)
+
+LLMs default to writing **sanitized, academic, "rap-flavored poetry"** — lines that scan correctly but would never survive a real session, a club, or a playlist. This section exists to break that pattern. Internalize it. Every bar must pass the test: **would a real artist actually say this on a track?**
+
+### The Sterilization Problem — Before/After
+
+These examples show the EXACT failure mode. The "before" is what an LLM naturally generates. The "after" is what an actual track sounds like.
+
+**❌ GENERIC (what LLMs write):**
+```
+"Signal through the static, I'm the frequency you lack"
+"Every pulse a passport and I'm never coming home"
+"Running through the darkness with a fire in my soul"
+"I rise above the shadows, breaking chains with every breath"
+"My words are like a weapon cutting through the night"
+```
+
+**✅ REAL (what actual tracks sound like):**
+```
+"Backseat of the ting, bassline shaking my chest"
+"Two pills deep and the sub just hit my fuckin' spine"
+"Sick of pretty words — talk shit or move your waist"
+"She told me link her late, I said I'm linking now"
+"Whole club's on a mad one, snare hit like a slap"
+```
+
+### Why The Generic Version Fails
+
+| Problem | What it looks like | What to do instead |
+|---------|-------------------|-------------------|
+| **Abstract metaphors** | "frequency you lack", "fire in my soul" | Name the actual thing: the club, the car, the body, the substance, the person |
+| **No physical grounding** | "running through the darkness" | Where? Doing what? With who? What does it smell/taste/feel like? |
+| **Pseudo-poetic vocabulary** | "shadows", "chains", "breath", "rise" | Use words people actually say out loud in 2025 |
+| **Missing bodies** | No sweat, no movement, no skin, no mess | Real music lives in bodies — write physically |
+| **Safe emotional distance** | Describing feelings from the outside | Put the listener IN the moment — first-person, present tense, sensory |
+| **No specificity** | "the night", "the city", "the world" | Name the street, the brand, the drug, the time, the model of car |
+| **Thesaurus syndrome** | Using fancy synonyms for simple things | "Fucked" not "devastated". "Whip" not "vehicle". "Dead" not "lifeless" |
+
+### The Three-Word Test
+
+Before delivering any bar, ask: **can I replace three words and make this a completely different song?** If yes — it's generic. A real bar is married to its context. You can't transplant it.
+
+```
+❌ "Running through the darkness with a fire in my soul"
+   → Replace "darkness" "fire" "soul" → works for ANY song = GENERIC
+
+✅ "3AM in the warehouse, jaw tight, bass in my ribs"
+   → Can't replace those words — they ARE the scene = REAL
+```
+
+---
+
 ## Explicit Language & Slang Guide
 
 ### How to use cuss words in rap (the right way)
@@ -392,25 +532,126 @@ Cuss words are NOT decoration. They land as **punctuation, intensifiers, and emo
 | **Noun swap** | `"Smart bitches make terrible choices"` | Self-empowering, owns the identity |
 | **Closer punch** | `"can't fuckin' dismiss"` | Makes the end rhyme hit harder |
 | **Verb replace** | `"danger fucked me sideways"` | More visceral than "ruined me" |
+| **Rhythmic filler (intentional)** | `"shit, I don't know"` | Conversational, mimics real speech cadence |
+| **Compound intensifier** | `"this shit's fuckin' ridiculous"` | Stacks for emphasis — use sparingly |
 
 **Never:** bolt cuss words onto a clean bar as a patch. If removing it doesn't change the meaning or rhythm, it shouldn't be there.
 
-### East Coast female rap slang reference
+**Default stance:** EXPLICIT unless the user explicitly asks for clean. Real club tracks, real rap records, real DnB MCs — they don't self-censor. Neither should you. The user will ask for clean if they want clean.
+
+### Modern Slang — Cross-Genre Reference
+
+**Use these naturally. Never force them. If a slang term doesn't fit the cadence, drop it.**
+
+#### UK / Grime / DnB / Club
 
 | Slang | Meaning | Example |
 |-------|---------|---------|
-| `deadass` | seriously / for real (NYC) | `"deadass had standards"` |
-| `no cap` | no lie | `"no cap, I knew better"` |
-| `drip` | style / swag | `"your drip hit different"` |
-| `hit different` | feel special or unusual | `"that kind hits different"` |
-| `on peak` / `at peak` | at maximum intensity | `"group chat on peak"` |
-| `whole [noun]` | intensifier (NYC) | `"whole crime scene"`, `"whole bitch"` |
-| `real quick` | fast / suddenly | `"deleted every bit — real quick"` |
-| `understood the assignment` | knew exactly what to do | `"she understood"` |
-| `good sick` | overwhelmed in a good way | `"that fuck-it-all-go-in sick"` |
-| `not my contest` | not my problem | `"not my fuckin' contest"` |
+| `ting` | thing / person (often attractive) | `"backseat of the ting"` |
+| `madting` / `mad one` | crazy situation | `"whole place on a mad one"` |
+| `peng` | attractive / excellent | `"she's peng, no discussion"` |
+| `link` / `link up` | meet / hook up | `"link me after the set"` |
+| `peak` | unfortunate / extreme | `"that's peak for him"` |
+| `wavey` | messed up / good (context-dependent) | `"two drinks in, we're wavey"` |
+| `dutty` | dirty / filthy (positive in club context) | `"dutty bassline"` |
+| `skeng` | weapon / impressive thing | `"beat goes like a skeng"` |
+| `yard` | home | `"back to yard, still buzzing"` |
+| `bare` | a lot / very | `"bare people in the dance"` |
+| `mandem` / `galdem` | the boys / the girls | `"galdem on the front row"` |
+| `big up` | respect / shout-out | `"big up the whole crew"` |
+| `selector` | DJ (DnB/jungle/dancehall) | `"selector, reload that"` |
+| `wheeling` / `wheel up` | rewind the track | `"wheel it back, again"` |
+| `bruck out` | go wild / dance hard | `"bruck out when the drop hits"` |
+| `rinse` | play repeatedly / dominate | `"rinse the set, no mercy"` |
 
-**Rule:** slang lands at internal positions — never on the end-rhyme beat unless it IS the rhyme. `"deadass"` before the chain, not instead of it.
+#### Trap / Drill / Hip-Hop (Current)
+
+| Slang | Meaning | Example |
+|-------|---------|---------|
+| `deadass` | seriously (NYC) | `"deadass had standards"` |
+| `no cap` | no lie | `"no cap, I knew better"` |
+| `bussin` | really good / hitting hard | `"this beat bussin"` |
+| `mid` | mediocre / disappointing | `"your whole flow is mid"` |
+| `opp` / `opps` | opposition / enemies | `"opps don't want this energy"` |
+| `slide` | pull up / go somewhere with intent | `"we slide at midnight"` |
+| `bet` | agreed / for sure | `"bet, I'm on my way"` |
+| `bando` | trap house / abandoned building | `"straight from the bando"` |
+| `drip` | style / fashion | `"drip too cold"` |
+| `gas` | hype up / exciting | `"that bar's gas"` |
+| `brazy` | crazy (Blood slang) | `"shit got brazy fast"` |
+| `hit different` | feels unique/special | `"4AM hits different"` |
+| `valid` | acceptable / approved | `"your fit's valid tonight"` |
+| `lowkey` / `highkey` | subtly / obviously | `"lowkey can't stop thinking"` |
+| `tweaking` | acting crazy / tripping | `"you're tweaking if you think—"` |
+| `whip` | car | `"whip outside, let's dip"` |
+
+#### Club / Rave / Electronic Scene
+
+| Slang | Meaning | Example |
+|-------|---------|---------|
+| `gurning` | jaw clenching (from MDMA) | `"whole front row gurning"` |
+| `on one` | high / in the zone | `"she's on one tonight"` |
+| `sesh` | session (drinking/partying) | `"sesh went till sunrise"` |
+| `munted` | very messed up | `"absolutely munted by 2AM"` |
+| `pingers` | pills (MDMA) | `"two pingers and a prayer"` |
+| `the dance` | the rave / the club (UK) | `"lost her in the dance"` |
+| `filthy` / `filth` | extremely good (bass music) | `"that drop was filth"` |
+| `stinking` | impressively good | `"stinking bassline"` |
+| `roll` | party / experience MDMA | `"rolling face at the front"` |
+| `ket` | ketamine | slang-only, context-dependent |
+| `wonky` | off-kilter / k-holed | `"gone a bit wonky"` |
+| `send it` | go all out / commit fully | `"fuck it, send it"` |
+| `buzzing` | excited / on something | `"buzzing off that last tune"` |
+
+#### Latin / Phonk / Brazilian
+
+| Slang | Meaning | Example |
+|-------|---------|---------|
+| `mandelão` | intense phonk bass pattern | production reference |
+| `perreo` | grinding dance (reggaeton) | `"perreo on the speaker"` |
+| `malianteo` | street-tough attitude | `"malianteo in the veins"` |
+| `bellaqueo` | provocative dancing/energy | `"bellaqueo energy all night"` |
+| `calle` | the street / street life | `"straight from the calle"` |
+
+### Explicit Content — When and How
+
+**The rule is simple: match the real-world music you're writing for.**
+
+A DnB MC doesn't say "I'm quite intoxicated" — they say "I'm fuckin' wavey." A trap verse about the block doesn't say "we departed promptly" — it says "we slid before the feds came." A club track about bodies on the dancefloor doesn't say "physical proximity" — it says "she's on me."
+
+**Explicit content tiers:**
+
+| Tier | When to use | What it sounds like |
+|------|-------------|-------------------|
+| **Street-raw** | Drill, trap, grime | Violence, drugs, money, sex — direct. No metaphors needed. `"Bag on me heavy, opps don't want smoke"` |
+| **Club-explicit** | DnB, rave, electronic | Substance references, body movement, hedonism, sweat. `"Two pills deep, bass in my jaw, she's grinding on the sub"` |
+| **Sexual-charged** | R&B-adjacent, melodic, phonk | Desire, tension, bodies. Not pornographic — felt. `"Hands where they shouldn't be, lips where they should"` |
+| **Emotional-raw** | Emo rap, introspective, cloud | Pain, addiction, self-destruction. `"Xan got me numb, still hurting underneath"` |
+| **Flex-aggressive** | Any subgenre | Dominance, success, status. `"Your whole career's my warm-up set"` |
+
+**What to AVOID even when explicit:**
+- Gratuitous shock with zero narrative purpose
+- Explicit content that contradicts the song's emotional arc
+- Slurs targeting protected groups
+- Sexual content involving minors
+- Glorifying real-world violence against specific named individuals
+
+### Sterilization Detector — Run On Every Verse
+
+Before delivering, scan every bar for these red flags:
+
+| Red Flag | Example | Fix |
+|----------|---------|-----|
+| 🚩 **"Soul" / "heart" / "fire" used as metaphors** | "fire in my soul" | Replace with a physical sensation: `"heat in my chest"`, `"sweat down my back"` |
+| 🚩 **"Darkness" / "shadows" / "light"** | "running from the shadows" | Name what's actually happening: `"running from the bailiffs"`, `"ducking cameras"` |
+| 🚩 **"Rise" / "fall" / "soar" / "fly"** | "I rise above it all" | Nobody talks like this. `"I came up from nothing"`, `"I got out"` |
+| 🚩 **Any line that could be a motivational poster** | "breaking chains with every breath" | Rewrite until it's too specific to be generic |
+| 🚩 **No named substance, brand, place, or person** | Generic verse with no proper nouns | Add at least one concrete reference per 4-bar group |
+| 🚩 **All emotion, no action** | "I feel the pain of loss" | What did you DO? `"Threw my phone at the wall and watched it crack"` |
+| 🚩 **Thesaurus words** | "commenced", "endeavor", "illuminate" | Use words you'd say in conversation |
+| 🚩 **Clean where the genre is dirty** | Writing a club DnB track with zero swearing | Add the language that matches the venue — clubs aren't church |
+
+**If a verse triggers 3+ red flags, rewrite the whole verse. Don't patch — the foundation is wrong.**
 
 ---
 
